@@ -32,7 +32,7 @@ const HomeLower = ({ post }) => {
                      setcLoading(true);
                      const data = await axios.post(
                             `${url}/post/add-cart`,
-                            { postId: post._id },
+                            { postId: post?._id },
                             {
                                    withCredentials: true,
                                    withXSRFToken: true,
@@ -111,7 +111,7 @@ const HomeLower = ({ post }) => {
                                                  className="bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition-all duration-300 text-sm font-medium disabled:bg-blue-400 disabled:cursor-not-allowed"
 
                                           >
-                                                 <Link to={`/buy/${post._id}`}> Buy Now</Link>
+                                                 <Link to={`/buy/${post?._id}`}> Buy Now</Link>
                                           </button>
                                           <button
                                                  onClick={addToCart}
