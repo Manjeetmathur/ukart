@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.width {
+  width: 300px;
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0; /* Fully transparent */
+  }
+  50% {
+    opacity: 0.5; /* Fully opaque */
+  }
+  100% {
+    opacity: 1; /* Fully transparent */
+  }
+}
+
+/* Keyframes for sliding from left to right */
+
+
+/* Keyframes for sliding from right to left */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%); /* Start off-screen to the right */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0); /* Slide to the normal position */
+    opacity: 1;
+  }
+}
+
+/* Apply the animation */
+.slide-right {
+  animation: slideInRight 1s ease-out forwards;
+}
+/* Keyframes for sliding from top to bottom */
+@keyframes slideInTop {
+  0% {
+    transform: translateY(-100%); /* Start off-screen at the top */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0); /* Slide to the normal position */
+    opacity: 1;
+  }
+}
+
+/* Apply the animation */
+.slide-top {
+  animation: slideInTop 1s ease-out forwards;
+}
+
+.fade {
+  animation: fadeInOut 1s ease-in;
+}
+@keyframes slideInLeft {
+  0% {
+    /* transform: translateX(-50%); Start off-screen to the left */
+    /* clip-path: inset(100% 100% 0 0); */
+    opacity: 0;
+  }
+  100% {
+    /* transform: translateX(0); Slide to the normal position */
+    /* clip-path: inset(0 0 0 0); */
+    opacity: 1;
+  }
+}
+.slideright {
+  animation: slideInLeft 3s linear;
+  /* animation: fadeInOut 2s ease-in-out; */
+}
+.cart{
+  animation: slideInRight 1s ease-in;
+}
+@keyframes appear{
+  from{
+    opacity: 0;
+    scale: 0.5;
+    /* clip-path: inset(100% 100% 0 0 ); */
+  }
+  to{
+    opacity: 1;
+    /* clip-path: inset(0 0 0 0 ); */
+    scale: 1;
+  }
+}
+.blockk{
+  animation: appear  linear;
+  animation-timeline:view() ;
+  animation-range: entry 0% cover 40%;
+
+}
+@keyframes appear1{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+.css1{
+  animation: appear1  linear;
+  animation-timeline:view() ;
+  animation-range: entry 0% cover 40%;
+
+}
