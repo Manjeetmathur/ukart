@@ -60,7 +60,7 @@ const Header = () => {
           </Link>
           {status && !admin && (
             <Link
-              to={`/profile/${userInfo._id}`}
+              to={`/profile/${userInfo?._id}`}
               className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
             >
               Profile
@@ -140,7 +140,7 @@ const Header = () => {
             </Link>
             {status && !admin && (
               <Link
-                to={`/profile/${userInfo._id}`}
+                to={`/profile/${userInfo?._id}`}
                 className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
                 onClick={() => setIsMenuOpen(false)}
               >

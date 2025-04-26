@@ -67,7 +67,7 @@ const Admin = () => {
           {active === "posts" && (
             <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-10 w-full">
               {posts?.length > 0 ? (
-                posts?.map((post) => <Posts key={post._id} post={post} />)
+                posts?.map((post) => <Posts key={post?._id} post={post} />)
               ) : (
                 <p className="text-gray-300 text-center col-span-full py-10 text-lg">
                   No posts available.

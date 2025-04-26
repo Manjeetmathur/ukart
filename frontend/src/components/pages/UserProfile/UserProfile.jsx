@@ -68,10 +68,10 @@ const UserProfile = ({ userId }) => {
                      <div className="container mx-auto p-6 bg-white shadow-2xl rounded-xl max-w-2xl w-full space-y-8 transform hover:shadow-3xl transition-shadow duration-300">
                             {/* User Profile Info */}
                             <div className="flex flex-col items-center space-y-3">
-                                   <h2 className="text-2xl font-bold text-gray-800">{user.fullname}</h2>
-                                   <p className="text-gray-600">{user.email}</p>
+                                   <h2 className="text-2xl font-bold text-gray-800">{user?.fullname}</h2>
+                                   <p className="text-gray-600">{user?.email}</p>
                                    <p className="text-gray-700 font-semibold text-lg">
-                                          Address: {user.address || "Not provided"}
+                                          Address: {user?.address || "Not provided"}
                                    </p>
                             </div>
 

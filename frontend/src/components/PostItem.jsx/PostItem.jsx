@@ -55,7 +55,7 @@ const PostItem = () => {
       setcLoading(true);
       const data = await axios.post(
         `${url}/post/add-cart`,
-        { postId: postData._id },
+        { postId: postData?._id },
         {
           withCredentials: true,
           withXSRFToken: true,
@@ -145,7 +145,7 @@ const PostItem = () => {
             >
               {cloading ? "Adding..." : "Add to Cart"}
             </button>
-            <Link to={`/buy/${postData._id}`} className="flex-1 bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-all duration-300 text-base font-semibold disabled:bg-purple-400 disabled:cursor-not-allowed shadow-md hover:shadow-lg text-center">
+            <Link to={`/buy/${postData?._id}`} className="flex-1 bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-all duration-300 text-base font-semibold disabled:bg-purple-400 disabled:cursor-not-allowed shadow-md hover:shadow-lg text-center">
               
                 Buy Now
             </Link>

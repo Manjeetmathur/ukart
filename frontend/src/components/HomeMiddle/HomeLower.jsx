@@ -77,7 +77,7 @@ const HomeLower = ({ post }) => {
                                           {post?.postTitle}
                                    </h2>
                                    <p className="text-sm text-gray-500 mt-1 line-clamp-2">
-                                          {post?.postContent.slice(0, 80)}...
+                                          {post?.postContent?.slice(0, 80)}...
                                    </p>
 
                                    {/* Price and Quantity */}

@@ -9,17 +9,18 @@ const Orders = ({ order }) => {
   const [editStatus, setEditStatus] = useState(false)
   const [editLoading, setEditLoading] = useState(false)
   const [status, setStaus] = useState("Completed");
-  const { getordersdetails } = useContext(context)
+  const { getordersdetails,getUserDetails } = useContext(context)
   const changeStatus = async () => {
     try {
       setEditLoading(true)
-      const res = await axios.patch(`${url}/post/edit-order-status`, { orderId: orderDetails._id, status }, {
+      const res = await axios.patch(`${url}/post/edit-order-status`, { orderId: orderDetails?._id, status }, {
         headers: { "content-type": "application/json" },
         withCredentials: true,
         withXSRFToken: true,
       })
       if (res.data.success) {
         getordersdetails()
+        getUserDetails()
       }
     } catch (error) {
 

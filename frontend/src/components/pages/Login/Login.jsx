@@ -66,7 +66,7 @@ const Login = () => {
                             {/* Logo or Branding */}
                             <div className="text-center">
                                    <h2 className="text-3xl font-bold text-gray-800 tracking-tight drop-shadow-md">
-                                          TechTrend Login
+                                          Ukart Login
                                    </h2>
                                    <p className="mt-2 text-sm text-gray-600 drop-shadow-sm">
                                           Access your electronics shopping experience

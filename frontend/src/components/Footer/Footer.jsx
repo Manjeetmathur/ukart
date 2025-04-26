@@ -8,7 +8,7 @@ const Footer = () => {
         {/* Logo and Navigation Links */}
         <div className="flex flex-col items-center md:items-start gap-6">
           <div className="text-2xl font-bold text-purple-700 drop-shadow-md">
-            <Link to="/">TechTrend</Link>
+            <Link to="/">Ukart</Link>
           </div>
           <div className="flex flex-wrap justify-center md:justify-start gap-6 sm:gap-8">
             <Link

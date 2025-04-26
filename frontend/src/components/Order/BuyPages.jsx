@@ -44,7 +44,7 @@ const BuyPage = () => {
                             setbLoading(true);
                             const response = await axios.post(
                                    `${url}/post/order-item`,
-                                   { postId: product?._id, postPrice: product.postPrice, quantity, paymentMethod },
+                                   { postId: product?._id, postPrice: product?.postPrice, quantity, paymentMethod },
                                    {
                                           withCredentials: true,
                                           headers: { "content-type": "application/json" },
@@ -80,16 +80,16 @@ const BuyPage = () => {
                             {/* Subtle Glow Effect */}
                             <div className="absolute inset-0 -z-10 bg-purple-500/20 blur-3xl rounded-xl scale-105 animate-pulse-slow"></div>
 
-                            <h1 className="text-3xl font-bold text-gray-800 drop-shadow-sm">{product.postTitle}</h1>
+                            <h1 className="text-3xl font-bold text-gray-800 drop-shadow-sm">{product?.postTitle}</h1>
 
                             <img
-                                   src={product.postImage}
-                                   alt={product.postTitle}
+                                   src={product?.postImage}
+                                   alt={product?.postTitle}
                                    className="w-64 mx-auto max-h-96 object-cover rounded-lg shadow-md"
                             />
 
-                            <p className="text-lg text-gray-700">{product.postContent}</p>
-                            <p className="text-xl font-semibold text-red-500">Price: ₹{product.postPrice}</p>
+                            <p className="text-lg text-gray-700">{product?.postContent}</p>
+                            <p className="text-xl font-semibold text-red-500">Price: ₹{product?.postPrice}</p>
 
                             {/* Quantity Selector */}
                             <div className="flex justify-center items-center my-4">
@@ -117,7 +117,7 @@ const BuyPage = () => {
                             <div className="flex flex-col items-center my-4 space-y-4">
                                    {userInfo?.address?.length < 4 && (
                                           <Link
-                                                 to={`/profile/${userInfo._id}`} // Fixed typo from userInfo._id/
+                                                 to={`/profile/${userInfo?._id}`} // Fixed typo from userInfo._id/
                                                  className="text-lg border-2 p-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-all duration-300"
                                           >
                                                  Add Address

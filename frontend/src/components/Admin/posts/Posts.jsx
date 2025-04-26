@@ -53,7 +53,7 @@ function Post({ post }) {
 
 
   const handleDelete = async () => {
-    const postId = post._id;
+    const postId = post?._id;
     try {
       setLoading(true);
       const { data } = await axios.post(

@@ -35,10 +35,10 @@ const Explore = () => {
     useEffect(() => { setCat(name) }, [])
   }
   const filterPosts = posts?.filter((item) => (
-    cat === "all" ? true : item.postParentCategory == cat
+    cat === "all" ? true : item?.postParentCategory == cat
   ));
   const filteredPosts = filterPosts?.filter((item) => (
-    productcat === "all" ? true : item.postCategory == productcat
+    productcat === "all" ? true : item?.postCategory == productcat
   ));
 
 
@@ -56,17 +56,17 @@ const Explore = () => {
               `}
             >
               <img
-                src={category.imag}
-                alt={category.name}
+                src={category?.imag}
+                alt={category?.name}
                 loading="lazy"
                 className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-2 border-pink-300 shadow-md transition-transform duration-300 hover:scale-110 `}
               />
               <p className={`mt-2 text-sm sm:text-base rounded-xl px-3 py-1 font-semibold capitalize backdrop-blur-sm ${
-                  cat === category.value
+                  cat === category?.value
                     ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg"
                     : "bg-white/80 text-purple-700 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-white hover:shadow-lg"
                 }`}>
-                {category.label}
+                {category?.label}
               </p>
             </button>
             
@@ -76,22 +76,22 @@ const Explore = () => {
           <div className="flex" key={idx}>
             <button
               
-              onClick={() => setProCat(category.value)}
+              onClick={() => setProCat(category?.value)}
               className={`p rounded-full text-sm sm:text-base font-semibold transition-all duration-300  min-w-max whitespace-nowrap 
               `}
             >
               <img
-                src={category.imag}
-                alt={category.name}
+                src={category?.imag}
+                alt={category?.name}
                 loading="lazy"
                 className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-2 border-pink-300 shadow-md transition-transform duration-300 hover:scale-110 `}
               />
               <p className={`mt-2 text-sm sm:text-base rounded-xl px-3 py-1 font-semibold capitalize backdrop-blur-sm ${
-                  cat === category.value
+                  cat === category?.value
                     ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg"
                     : "bg-white/80 text-purple-700 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-white hover:shadow-lg"
                 }`}>
-                {category.label}
+                {category?.label}
               </p>
             </button>
             
@@ -101,22 +101,22 @@ const Explore = () => {
           <div className="flex" key={idx}>
             <button
               
-              onClick={() => setProCat(category.value)}
+              onClick={() => setProCat(category?.value)}
               className={`p rounded-full text-sm sm:text-base font-semibold transition-all duration-300  min-w-max whitespace-nowrap 
               `}
             >
               <img
-                src={category.imag}
-                alt={category.name}
+                src={category?.imag}
+                alt={category?.name}
                 loading="lazy"
                 className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-2 border-pink-300 shadow-md transition-transform duration-300 hover:scale-110 `}
               />
               <p className={`mt-2 text-sm sm:text-base rounded-xl px-3 py-1 font-semibold capitalize backdrop-blur-sm ${
-                  cat === category.value
+                  cat === category?.value
                     ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg"
                     : "bg-white/80 text-purple-700 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-white hover:shadow-lg"
                 }`}>
-                {category.label}
+                {category?.label}
               </p>
             </button>
             
@@ -129,7 +129,7 @@ const Explore = () => {
         {filteredPosts?.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {filteredPosts.map((item) => (
-              <HomeLower key={item._id} post={item} />
+              <HomeLower key={item?._id} post={item} />
             ))}
           </div>
         ) : (
