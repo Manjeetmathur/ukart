@@ -42,6 +42,7 @@ const Header = () => {
             alt="Logo"
             className="w-[120px] h-[38px] md:w-[120px] rounded-xl transition-transform duration-300 hover:scale-105"
           />
+          <div className="sparkle"></div>
         </Link>
 
         {/* Desktop Navigation */}
