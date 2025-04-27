@@ -137,7 +137,7 @@ const PostItem = () => {
           </div>
 
           {/* Action Buttons */}
-          {postData.stock == 0 ? <p className="flex-1 text-center bg-red-400 text-white py-3 rounded-lg transition-all duration-300 text-base font-semibold disabled shadow-md hover:shadow-lg">Sold out</p> : <div className="flex flex-col sm:flex-row gap-4 w-full">
+          {postData?.stock == 0 ? <p className="flex-1 text-center bg-red-400 text-white py-3 rounded-lg transition-all duration-300 text-base font-semibold disabled shadow-md hover:shadow-lg">Sold out</p> : <div className="flex flex-col sm:flex-row gap-4 w-full">
             <button
               onClick={addToCart}
               className="flex-1 bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-all duration-300 text-base font-semibold disabled:bg-purple-400 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
