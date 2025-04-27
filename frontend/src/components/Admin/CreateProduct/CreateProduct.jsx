@@ -12,6 +12,7 @@ const CreateProduct = () => {
   const [postPrice, setpostPrice] = useState("");
   const [postCategory, setpostCategory] = useState("");
   const [postParentCategory, setpostParentCategory] = useState("");
+  const [stock, setstock] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { getAllPosts } = useContext(context)
@@ -26,6 +27,7 @@ const CreateProduct = () => {
       formData.append("postPrice", postPrice);
       formData.append("postCategory", postCategory);
       formData.append("postParentCategory", postParentCategory);
+      formData.append("stock", stock);
       const { data } = await axios.post(`${url}/post/create-post`, formData, {
         headers: { "content-type": "multipart/form-data" },
         withCredentials: true,
@@ -43,6 +45,7 @@ const CreateProduct = () => {
         setpostContent("");
         setpostPrice("");
         setpostTitle("");
+        setstock(0);
       } else {
         toast.error(data.message);
       }
@@ -119,7 +122,20 @@ const CreateProduct = () => {
               className="mt-1 w-full px-3 py-2 border   rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
-
+          <div>
+            <label htmlFor="postPrice" className="block text-sm font-medium text-gray-300">
+              Stcks
+            </label>
+            <input
+              type="text"
+              id="stock"
+              name="stock"
+              required
+              value={stock}
+              onChange={(e) => setstock(e.target.value)}
+              className="mt-1 w-full px-3 py-2 border   rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
           {/* Post Category */}
           <div className="">
             <label htmlFor="postCategory" className="block text-sm font-medium text-gray-300">
@@ -139,6 +155,7 @@ const CreateProduct = () => {
               <option value="shringar">Sgringar</option>
             </select>
           </div>
+
           {postParentCategory === 'electronics' &&
             <div>
               <label htmlFor="postCategory" className="block text-sm font-medium text-gray-300">
@@ -204,8 +221,10 @@ const CreateProduct = () => {
                 <option value="makeupkit">makeupkit</option>
 
               </select>
+              
             </div>
           }
+          
           {/* Submit Button */}
           <button
             type="submit"

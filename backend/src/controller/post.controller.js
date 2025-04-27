@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { Cart } from "../model/Cart.model.js";
 import { Order } from "../model/Oreder.model.js";
 import { Post } from "../model/post.model.js";
-import { User } from "../model/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
@@ -10,7 +9,7 @@ import sendMail from "../utils/Sendmail.js";
 import { Admin } from "../model/admin.model.js";
 
 const createPost = asyncHandler(async (req, res) => {
-       const { postContent, postPrice, postTitle, postCategory, postParentCategory } = req.body
+       const { postContent, postPrice, postTitle, postCategory, postParentCategory,stock } = req.body
 
        try {
               const admin = req.user
@@ -47,7 +46,7 @@ const createPost = asyncHandler(async (req, res) => {
                      postTitle,
                      postCategory,
                      postParentCategory,
-                     stock: 1,
+                     stock: stock || 1 ,
                      postImage: postImage?.secure_url,
                      owner: admin._id
               })
@@ -67,7 +66,7 @@ const createPost = asyncHandler(async (req, res) => {
 })
 
 export const editPost = async (req, res) => {
-       const { postId, postContent, postTitle, postPrice } = req.body
+       const { postId, postContent, postTitle, postPrice,stock } = req.body
 
        const admin = req.user
        try {
@@ -89,7 +88,8 @@ export const editPost = async (req, res) => {
                                    postContent: postContent || post.postContent,
                                    postTitle: postTitle || post.postTitle,
                                    postPrice: postPrice || post.postPrice,
-                                   postImage: postImage?.secure_url || post.postImage
+                                   postImage: postImage?.secure_url || post.postImage,
+                                   stock: stock || post.stock
                             }
                      }, { new: true }
               )

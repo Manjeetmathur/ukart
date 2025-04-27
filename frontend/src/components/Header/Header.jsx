@@ -7,8 +7,7 @@ import { logout } from "../../store/authSlice";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { url } from "../bacxkendUrl/BackendUrl";
-import p1 from "../../assets/p1.jpg";
-// import p1 from "../../assets/p5.png";
+import p1 from "../../assets/p6.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -18,7 +17,9 @@ const Header = () => {
 
   const logoutHandler = async () => {
     try {
-      const { data } = await axios.get(`${url}/user/logout`, { withCredentials: true });
+      const { data } = await axios.get(`${url}/user/logout`, {
+        withCredentials: true,
+      });
       if (data.success) {
         dispatch(logout());
         toast.success(data.message);
@@ -32,36 +33,35 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#8ff3f3]  sticky top-0 z-50 font-poppins shadow-2xl">
+    <header className="sticky top-0 z-50 font-poppins bg-[#8ff3f3]  shadow-2xl ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2 sparkle">
           <img
             src={p1}
             alt="Logo"
-            className="w-[80px] rounded-xl h-[50px] md:w-[120px] "
+            className="w-[120px] h-[38px] md:w-[120px] rounded-xl transition-transform duration-300 hover:scale-105"
           />
-         
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-6">
           <Link
             to="/"
-            className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
+            className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 font-semibold text-sm glow-button"
           >
             Home
           </Link>
           <Link
             to="/about"
-            className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
+            className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 font-semibold text-sm glow-button"
           >
             About
           </Link>
           {status && !admin && (
             <Link
               to={`/profile/${userInfo?._id}`}
-              className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
+              className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 font-semibold text-sm glow-button"
             >
               Profile
             </Link>
@@ -69,7 +69,7 @@ const Header = () => {
           {status && !admin && (
             <Link
               to="/order-page"
-              className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
+              className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 font-semibold text-sm glow-button"
             >
               Orders
             </Link>
@@ -77,7 +77,7 @@ const Header = () => {
           {status && !admin && (
             <Link
               to="/cart"
-              className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 flex items-center font-semibold text-sm"
+              className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 flex items-center font-semibold text-sm glow-button"
             >
               <FiShoppingCart className="mr-1" /> Cart
             </Link>
@@ -85,10 +85,15 @@ const Header = () => {
           {admin && (
             <Link
               to="/admin"
-              className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
+              className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 font-semibold text-sm glow-button"
             >
               Dashboard
             </Link>
+          )}
+          {(status || admin) && (
+            <div className="floating-badge bg-gradient-to-r from-yellow-400 to-orange-400 text-purple-950 text-xs font-semibold px-2 py-1 rounded-full shadow-md">
+              {admin ? "Admin" : "Logged In"}
+            </div>
           )}
         </nav>
 
@@ -97,14 +102,14 @@ const Header = () => {
           {status ? (
             <button
               onClick={logoutHandler}
-              className="bg-gradient-to-r from-yellow-300 to-pink-300 hover:from-gray-100 hover:to-pink-200 text-black px-3 py-1.5 rounded-lg transition-all duration-300 flex items-center shadow-md text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
+              className="bg-gradient-to-r from-yellow-400 to-pink-400 hover:from-yellow-300 hover:to-pink-300 text-purple-800 px-3 py-1.5 rounded-lg transition-all duration-300 flex items-center shadow-md text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 glow-button"
             >
               <FiUser className="mr-1" /> Logout
             </button>
           ) : (
             <Link
               to="/login"
-              className="bg-gradient-to-r from-white to-pink-300 hover:from-gray-100 hover:to-pink-200 text-purple-700 px-3 py-1.5 rounded-lg transition-all duration-300 flex items-center shadow-md text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
+              className="bg-gradient-to-r from-white to-pink-300 hover:from-gray-100 hover:to-pink-200 text-purple-700 px-3 py-1.5 rounded-lg transition-all duration-300 flex items-center shadow-md text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 glow-button"
             >
               <FiUser className="mr-1" /> Login
             </Link>
@@ -113,7 +118,7 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden text-black text-2xl sm:text-3xl"
+          className="lg:hidden text-purple-950 text-2xl sm:text-3xl"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <IoClose /> : <IoReorderThree />}
@@ -122,18 +127,18 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden  bg-[#7bffde]  border-t border-black px-4 sm:px-6 py-4 shadow-xl rounded-2xl  ">
+        <div className="lg:hidden bg-gradient-to-r from-purple-500 to-blue-500 glassmorphism border-t border-white/20 px-4 sm:px-6 py-4 shadow-xl rounded-b-2xl animate-slideUp">
           <div className="flex flex-col space-y-3">
             <Link
               to="/"
-              className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
+              className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 font-semibold text-sm glow-button"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               to="/about"
-              className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
+              className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 font-semibold text-sm glow-button"
               onClick={() => setIsMenuOpen(false)}
             >
               About
@@ -141,7 +146,7 @@ const Header = () => {
             {status && !admin && (
               <Link
                 to={`/profile/${userInfo?._id}`}
-                className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
+                className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 font-semibold text-sm glow-button"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Profile
@@ -150,7 +155,7 @@ const Header = () => {
             {status && !admin && (
               <Link
                 to="/order-page"
-                className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
+                className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 font-semibold text-sm glow-button"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Orders
@@ -159,7 +164,7 @@ const Header = () => {
             {status && !admin && (
               <Link
                 to="/cart"
-                className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 flex items-center font-semibold text-sm"
+                className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 flex items-center font-semibold text-sm glow-button"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <FiShoppingCart className="mr-1" /> Cart
@@ -168,7 +173,7 @@ const Header = () => {
             {admin && (
               <Link
                 to="/admin"
-                className="text-black hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-500 transition-all duration-300 font-semibold text-sm"
+                className="text-purple-950 hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 transition-all duration-300 font-semibold text-sm glow-button"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Dashboard
@@ -180,18 +185,23 @@ const Header = () => {
                   logoutHandler();
                   setIsMenuOpen(false);
                 }}
-                className="bg-gradient-to-r from-blue-200 to-pink-300 hover:from-blue-100 hover:to-pink-200 text-purple-700 px-3 py-1.5 rounded-lg transition-all duration-300 flex items-center shadow-md text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
+                className="bg-gradient-to-r from-yellow-400 to-pink-400 hover:from-yellow-300 hover:to-pink-300 text-purple-800 px-3 py-1.5 rounded-lg transition-all duration-300 flex items-center shadow-md text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 glow-button"
               >
                 <FiUser className="mr-1" /> Logout
               </button>
             ) : (
               <Link
                 to="/login"
-                className="bg-gradient-to-r from-white to-pink-300 hover:from-gray-100 hover:to-pink-200 text-purple-700 px-3 py-1.5 rounded-lg transition-all duration-300 flex items-center shadow-md text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
+                className="bg-gradient-to-r from-white to-pink-300 hover:from-gray-100 hover:to-pink-200 text-purple-700 px-3 py-1.5 rounded-lg transition-all duration-300 flex items-center shadow-md text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 glow-button"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <FiUser className="mr-1" /> Login
               </Link>
+            )}
+            {(status || admin) && (
+              <div className="floating-badge bg-gradient-to-r from-yellow-400 to-orange-400 text-purple-950 text-xs font-semibold px-2 py-1 rounded-full shadow-md">
+                {admin ? "Admin" : "Logged In"}
+              </div>
             )}
           </div>
         </div>

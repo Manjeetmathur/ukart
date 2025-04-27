@@ -11,6 +11,7 @@ function Post({ post }) {
   const [editTitle, setEditTitle] = useState(post.postTitle);
   const [editContent, setEditContent] = useState(post.postContent);
   const [editPrice, setEditPrice] = useState(post.postPrice);
+  const [editStock, setStock] = useState(post.stock);
   const [loading, setLoading] = useState(false);
   const { getAllPosts } = useContext(context)
   const handleMenuClick = () => {
@@ -24,6 +25,7 @@ function Post({ post }) {
       formdata.append("postTitle", editTitle);
       formdata.append("postContent", editContent);
       formdata.append("postPrice", editPrice);
+      formdata.append("stock", editStock);
 
       // Append image only if there's a new file
       if (editImage) {
@@ -111,6 +113,12 @@ function Post({ post }) {
             type="text"
             value={editPrice}
             onChange={(e) => setEditPrice(e.target.value)}
+            className="w-full border border-gray-600 bg-gray-700 text-white p-2 rounded-lg focus:ring focus:ring-blue-500 mb-2"
+          />
+          <input
+            type="number"
+            value={editStock}
+            onChange={(e) => setStock(e.target.value)}
             className="w-full border border-gray-600 bg-gray-700 text-white p-2 rounded-lg focus:ring focus:ring-blue-500 mb-2"
           />
 

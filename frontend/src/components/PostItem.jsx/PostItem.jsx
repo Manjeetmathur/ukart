@@ -75,10 +75,10 @@ const PostItem = () => {
     }
     ''
   };
-
+  console.log(postData)
   const openWhatsapp = () => {
     const phoneNumber = "+919973154827";
-    const message = "Hi, I'd like to order this item.\n" + postData?.postTitle +"\n price : Rs." + postData?.postPrice ;
+    const message = "Hi, I'd like to order this item.\n" + postData?.postTitle + "\n price : Rs." + postData?.postPrice;
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`);
   };
 
@@ -137,7 +137,7 @@ const PostItem = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full">
+          {postData.stock == 0 ? <p className="flex-1 text-center bg-red-400 text-white py-3 rounded-lg transition-all duration-300 text-base font-semibold disabled shadow-md hover:shadow-lg">Sold out</p> : <div className="flex flex-col sm:flex-row gap-4 w-full">
             <button
               onClick={addToCart}
               className="flex-1 bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-all duration-300 text-base font-semibold disabled:bg-purple-400 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
@@ -146,16 +146,17 @@ const PostItem = () => {
               {cloading ? "Adding..." : "Add to Cart"}
             </button>
             <Link to={`/buy/${postData?._id}`} className="flex-1 bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-all duration-300 text-base font-semibold disabled:bg-purple-400 disabled:cursor-not-allowed shadow-md hover:shadow-lg text-center">
-              
-                Buy Now
+
+              Buy Now
             </Link>
-            <button
-              onClick={openWhatsapp}
-              className="flex-1 bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-all duration-300 text-base font-semibold shadow-md hover:shadow-lg"
-            >
-              WhatsApp Now
-            </button>
-          </div>
+
+          </div>}
+          <button
+            onClick={openWhatsapp}
+            className="flex-1 bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-all duration-300 text-base font-semibold shadow-md hover:shadow-lg"
+          >
+            WhatsApp Now
+          </button>
         </div>
       </div>
 
