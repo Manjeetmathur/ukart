@@ -18,7 +18,7 @@ function App() {
 
 
   return (
-    <div className="m-">
+    <div className="">
       <Toaster/>
         <Header />
         <main>

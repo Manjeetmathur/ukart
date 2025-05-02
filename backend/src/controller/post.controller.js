@@ -289,7 +289,7 @@ const getUserCartItem = asyncHandler(async (req, res) => {
 })
 
 const orderItem = asyncHandler(async (req, res) => {
-       const { postId, postPrice, quantity ,mod} = req.body
+       const { postId, postPrice, quantity ,addressId} = req.body
        const user = req.user
        try {
               if (!user) {
@@ -297,6 +297,9 @@ const orderItem = asyncHandler(async (req, res) => {
               }
               if (!postId) {
                      throw new ApiError(404, "post not found")
+              }
+              if (!addressId) {
+                     throw new ApiError(404, "address not found")
               }
               // const admin = await Admin.findOne({ posts: postId })
               const p = await Post.findById(postId)
@@ -312,10 +315,11 @@ const orderItem = asyncHandler(async (req, res) => {
                      ],
                      postPrice,
                      user: user._id,
-                     address: user.address,
+                     address: addressId,
                      phone: user.phone,
                      paymentMode:"COD"
               })
+              console.log(orderpost)
               // console.log(orderpost)
               user.order.push(orderpost._id)
               await user.save()

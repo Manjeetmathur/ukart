@@ -34,13 +34,14 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 font-poppins bg-[#8ff3f3]  shadow-2xl ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div className="max-w-7l mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2 sparkle">
           <img
             src={p1}
             alt="Logo"
             className="w-[120px] h-[38px] md:w-[120px] rounded-xl transition-transform duration-300 hover:scale-105"
+            // loading="lazy
           />
           <div className="sparkle"></div>
         </Link>

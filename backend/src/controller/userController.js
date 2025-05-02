@@ -5,6 +5,7 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { User } from "../model/user.model.js";
 import bcrypt from "bcryptjs"
 import { Admin } from "../model/admin.model.js";
+import { Address } from "../model/address.js";
 const registerUser = asyncHandler(async (req, res) => {
   const { fullName, email, password, confirmPassword, role } = req.body;
   try {
@@ -35,7 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
       profile: profile?.url || " ",
       email,
       password: hashPassword,
-      address:""
+      address: ""
     });
 
     if (role === 'admin') {
@@ -88,7 +89,7 @@ const login = asyncHandler(async (req, res) => {
     if (!isPasswordValid) {
       throw new ApiError(404, "Password is not valid . . .")
     }
-    const token = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET, )
+    const token = jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET,)
 
     const tokenOption = {
       // domain : 'github',
@@ -142,9 +143,9 @@ const logout = asyncHandler(async (req, res) => {
 
 const makeUserAdmin = asyncHandler(async (req, res) => {
   const { email, password } = req.body
-console.log(email)
+  console.log(email)
   try {
-    const user = await User.findOne({email })
+    const user = await User.findOne({ email })
 
     const hashPassword = await bcrypt.hash(password, 10)
     const admin = await Admin.create({
@@ -167,16 +168,102 @@ console.log(email)
 })
 const addAddress = asyncHandler(async (req, res) => {
   const { address } = req.body
-
+  // console.log(address)
   try {
     const user = req.user
+    const add = await Address.create(address)
+    user.address.push(add)
+    await user.save()
+    res.status(200).json({
+      message: "adress updated",
+      success: true
+    })
 
-    await User.findByIdAndUpdate(user._id, {
-      $set: {
-        address
-      },
+  } catch (error) {
+    res.json({
+      message: error.message,
+    })
+  }
+})
+const deleteAddress = asyncHandler(async (req, res) => {
+  const  {addressId}  = req.params
+  try {
+    const user = req.user
+    if (!addressId) {
+      throw new Error("Address is not valid")
+    }
+    const add = await Address.findById(addressId)
+    if (!add) {
+      throw new Error("Address is not valid")
 
-    }, { new: true })
+    }
+    await Address.findByIdAndDelete(addressId)
+    user.address = user.address.filter(item => item.id !== addressId)
+    await user.save()
+    res.status(200).json({
+      message: "adress delete",
+      success: true
+    })
+
+  } catch (error) {
+    res.json({
+      message: error.message,
+    })
+  }
+})
+const getAddress = asyncHandler(async (req, res) => {
+  const  {id}  = req.params
+  try {
+
+//    let addressId=id
+    console.log(id)
+    const user = req.user
+    if (!id) {
+      throw new Error("Address is not valid")
+    }
+    const add = await Address.findById(id)
+    if (!add) {
+      throw new Error("Address is not valid")
+    }
+    console.log(add)
+    res.status(200).json({
+      message: "adress fetched",
+      success: true,
+      add
+    })
+
+  } catch (error) {
+    res.json({
+      message: error.message,
+    })
+  }
+})
+const updateAddress = asyncHandler(async (req, res) => {
+  const { addressId, address } = req.body
+  console.log(address,addressId)
+  try {
+    const user = req.user
+    if (!addressId) {
+      throw new Error("Address is not valid")
+    }
+    const add = await Address.findById(addressId)
+    console.log(add)
+    if (!add) {
+      throw new Error("Address is not valid")
+    }
+    const newad = await Address.findByIdAndUpdate(addressId,
+      {
+        $set: {
+          state: address?.state ? address.state : add.state,
+          district: address?.district ?address?.district :add.district,
+          area: address?.area ? address?.area : add.area,
+          pincode: address?.pincode ?address?.pincode: add.pincode,
+        },
+      }, {
+      new: true
+    },
+    )
+    console.log(newad)
     res.status(200).json({
       message: "adress updated",
       success: true
@@ -215,7 +302,7 @@ export const phoneNo = asyncHandler(async (req, res) => {
 const getUserDetails = asyncHandler(async (req, res) => {
   let user = req.user
   const email = user.email
-  user = await User.findOne({ email }).populate({ path: 'order' }).populate({ path: 'cart' })
+  user = await User.findOne({ email }).populate({ path: 'order' }).populate({ path: 'cart' }).populate({ path: 'address' })
   let admin = await Admin.findOne({ email })
 
   res.status(200).json({
@@ -226,4 +313,4 @@ const getUserDetails = asyncHandler(async (req, res) => {
 })
 
 
-export { registerUser, login, logout, getUserDetails, makeUserAdmin ,addAddress};
+export { registerUser, getAddress,login, logout, getUserDetails, makeUserAdmin, addAddress ,updateAddress,deleteAddress};

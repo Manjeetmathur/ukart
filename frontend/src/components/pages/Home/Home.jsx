@@ -16,7 +16,7 @@ const categories = [
     image: "https://tse1.mm.bing.net/th?id=OIP.wd3p1bZSRi2rJBR-PaWVeQHaHa&pid=Api&P=0&h=180",
   },
   {
-    name: "shringar",
+    name: "sringaar",
     image: "https://wallpapercave.com/wp/wp8149661.jpg",
   },
 ];
@@ -40,7 +40,7 @@ const banners = [
   {
     image: "https://www.culturalindia.net/iliimages/Solah-Shringaar-ili-104-img-7.jpg",
     title: "New Arrivals",
-    subtitle: "Shringar",
+    subtitle: "Sringaar",
     cta: "Explore Now",
     link: "/explore/shringar",
   },
@@ -105,7 +105,7 @@ const Home = () => {
         <h2 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-6 text-center sparkle">
           Shop by Category
         </h2>
-        <div className="flex overflow-x-auto space-x-6 pb-4 scrollbar-hide snap-x snap-mandatory justify-center">
+        <div className="flex overflow-x-auto space-x-6 pb-4 scrollbar-hide snap-x snap-mandatory justify-center pl-[40px]">
           {categories.map((category) => (
             <Link
               key={category.name}

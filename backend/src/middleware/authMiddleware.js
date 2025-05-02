@@ -8,6 +8,7 @@ import { Admin } from "../model/admin.model.js";
 export const verifyJwt = asyncHandler(async(req,res,next) => {
        try {
               const token = req.cookies?.token
+              // console.log(token)
               if(!token){
                      throw new ApiError(401 , "Unauthorized request . . . ")
               }

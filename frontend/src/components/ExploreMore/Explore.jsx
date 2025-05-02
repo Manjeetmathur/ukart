@@ -17,12 +17,12 @@ const Explore = () => {
       value: "all",
     },
     {
-      imag: "https://cdn.vox-cdn.com/thumbor/gRRyI6jZSAeMRq3C1is36HtvFfs=/3x0:1017x676/1200x800/filters:focal(3x0:1017x676)/cdn.vox-cdn.com/imported_assets/1575983/smartphone-lineup_1020.jpg",
+      imag: "https://tse2.mm.bing.net/th?id=OIP.L0ljSYevUa1znazEpoHDMgHaE8&pid=Api&P=0&h=180",
       label: "Airpods",
       value: "airpods",
     },
     {
-      imag: "https://cdn.vox-cdn.com/thumbor/gRRyI6jZSAeMRq3C1is36HtvFfs=/3x0:1017x676/1200x800/filters:focal(3x0:1017x676)/cdn.vox-cdn.com/imported_assets/1575983/smartphone-lineup_1020.jpg",
+      imag: "https://m.media-amazon.com/images/S/aplus-media/vc/97ee441c-f142-4386-be96-3b289d65e024.jpg",
       label: "Neckband",
       value: "neckband",
     },
@@ -32,7 +32,7 @@ const Explore = () => {
       value: "watch",
     },
     {
-      imag: "https://tse3.mm.bing.net/th?id=OIP.FCB33TXqP_3eepbjjans_AHaHa&pid=Api&P=0&h=180",
+      imag: "https://tse3.mm.bing.net/th?id=OIP.3Lwp2zMqdI-R7LbkXaXxrwHaHa&pid=Api&P=0&h=180",
       label: "Earphones",
       value: "earphone",
     },
@@ -93,7 +93,7 @@ const Explore = () => {
       value: "rings",
     },
     {
-      imag: "https://tse3.mm.bing.net/th?id=OIP.ulAKFmpPLSLQSR_s5WTfcQHaJ4&pid=Api&P=0&h=180",
+      imag: "https://i5.walmartimages.com/asr/ff7c1af0-8802-4a1f-8ed8-ccbf09d4a2b0_1.dede3f39941244c7b22f283f5bed36f3.jpeg",
       label: "Makeup Kit",
       value: "makeupkit",
     },
@@ -120,7 +120,7 @@ const Explore = () => {
         <h2 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-6 text-center sparkle animate-slideUp">
           Explore Categories
         </h2>
-        <div className=" p-2 px-6 overflow-x-auto space-x-4 scrollbar-hide snap-x snap-mandatorygap-3">
+        <div className="flex p-2 px-6 overflow-x-auto space-x-4 scrollbar-hide snap-x snap-mandatorygap-3">
           {name === "electronics" &&
             electronicscategories.map((category, idx) => (
               <button

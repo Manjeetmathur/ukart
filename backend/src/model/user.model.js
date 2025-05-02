@@ -5,7 +5,7 @@ const userSchema = new Schema(
               phone: {
                      type: String,
               },
-              
+
               fullname: {
                      type: String,
                      required: true,
@@ -35,12 +35,15 @@ const userSchema = new Schema(
                             ref: "Order"
                      }
               ],
-              address: 
+              address: [
                      {
-                           type:String
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: "Address"
+
                      }
+              ]
               ,
-              
+
        },
        {
               timestamps: true,

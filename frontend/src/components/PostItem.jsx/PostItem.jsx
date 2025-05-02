@@ -75,7 +75,6 @@ const PostItem = () => {
     }
     ''
   };
-  console.log(postData)
   const openWhatsapp = () => {
     const phoneNumber = "+919973154827";
     const message = "Hi, I'd like to order this item.\n" + postData?.postTitle + "\n price : Rs." + postData?.postPrice;

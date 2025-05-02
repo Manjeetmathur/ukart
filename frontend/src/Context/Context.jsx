@@ -33,7 +33,7 @@ const ContextProvider = ({ children }) => {
               const res = data.data
               if (res.success) {
                      res.admin ? dispatch(setUserInfo(res.admin)) : dispatch(setUserInfo(res.user))
-
+                     
 
               }
               // dispatch(setPosts( res.allPost));
