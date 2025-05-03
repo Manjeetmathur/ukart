@@ -19,6 +19,10 @@ const categories = [
     name: "sringaar",
     image: "https://wallpapercave.com/wp/wp8149661.jpg",
   },
+  {
+    name: "decoration",
+    image: "https://deowgxgt4vwfe.cloudfront.net/uploads/1677676541_original.jpg",
+  },
 ];
 
 // Sample banners
@@ -44,6 +48,13 @@ const banners = [
     cta: "Explore Now",
     link: "/explore/shringar",
   },
+  {
+    image: "https://tse1.mm.bing.net/th?id=OIP.dvd4bSti6M3QZ_BGmb9KbwHaEK&pid=Api&P=0&h=180",
+    title: "Decorate the world",
+    subtitle: "Decoration",
+    cta: "Explore Now",
+    link: "/explore/decoration",
+  },
 ];
 
 const Home = () => {
@@ -62,10 +73,14 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 font-poppins bg-wave-pattern">
       {/* Hero Banner Slider */}
       <div className="overflow-hidden relative">
-        <div
-          className="w-full h-[40vh] sm:h-[50vh] md:h-[400px] lg:h-[60vh] "
-          style={{ backgroundImage: `url(${banners[bannerIndex].image})` }}
-        >
+        <div className="w-full h-[40vh] sm:h-[50vh] md:h-[400px] lg:h-[60vh] relative">
+          {/* Image element instead of background image */}
+          <img
+            src={banners[bannerIndex].image}
+            alt={banners[bannerIndex].title}
+            className="w-full h-full object-cover"
+          />
+
           <div className="absolute inset-0 glassmorphism flex items-center justify-start px-4 sm:px-8 md:px-12 lg:px-16">
             <div className="text-left max-w-lg animate-slideUp">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-pink-300 tracking-tight drop-shadow-lg sparkle">
@@ -82,6 +97,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+
         {/* Banner Navigation Dots */}
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
           {banners.map((_, idx) => (
@@ -89,13 +105,13 @@ const Home = () => {
               key={idx}
               onClick={() => setBannerIndex(idx)}
               aria-label={`Select banner ${idx + 1}`}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                bannerIndex === idx ? "bg-pink-300 scale-150 shadow-md" : "bg-white/60 hover:bg-white/80"
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${bannerIndex === idx ? "bg-pink-300 scale-150 shadow-md" : "bg-white/60 hover:bg-white/80"
+                }`}
             />
           ))}
         </div>
       </div>
+
 
       {/* Decorative Divider */}
       <div className="divider-wave"></div>
@@ -105,7 +121,7 @@ const Home = () => {
         <h2 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-6 text-center sparkle">
           Shop by Category
         </h2>
-        <div className="flex overflow-x-auto space-x-6 pb-4 scrollbar-hide snap-x snap-mandatory justify-center pl-[40px]">
+        <div className="flex overflow-x-auto space-x-6 pb-4 scrollbar-hide snap-x snap-mandatory justify-center pl-[180px]">
           {categories.map((category) => (
             <Link
               key={category.name}
@@ -207,7 +223,7 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      
+
     </div>
   );
 };

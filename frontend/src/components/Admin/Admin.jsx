@@ -1,88 +1,162 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { FiMenu } from "react-icons/fi";
+import { url } from "../bacxkendUrl/BackendUrl";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import CreateProduct from "./CreateProduct/CreateProduct";
-import Orders from "./Orders/Orders";
 import Posts from "./posts/Posts";
 import OrderDetails from "./Orders/OrderDetails";
+import CreateProduct from "./CreateProduct/CreateProduct";
 
-const Admin = () => {
-  const navigate = useNavigate();
+const AdminPanel = () => {
+  const [activeTab, setActiveTab] = useState("users");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [userData, setUserData] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { admin, userInfo, orderDetails, posts } = useSelector((st) => st.auth);
 
-  useEffect(() => {
-    if (!admin) {
-      navigate("/");
-    }
-  }, [admin, navigate]);
 
-  const [active, setActive] = useState("posts");
+  const getAll = async () => {
+    try {
+      const { data } = await axios.get(`${url}/user/get-all-users-details`, {
+        withCredentials: true,
+        withXSRFToken: true,
+      });
+      console.log(data)
+      if (data.success) {
+        setUserData(data.users);
+      }
+    } catch (err) {
+      console.error("Failed to fetch users", err);
+    }
+  };
+  useEffect(() => {
+    getAll();
+  }, []);
+  const filteredUsers = userData.filter((user) =>
+    user.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <div
-      className="min-h-screen  bg-gradient-to-br from-pink-300 via-purple-300 to-blue-400 flex flex-col relative overflow-hidden"
-      id="admin-dash"
-    >
-      {/* Subtle Texture Overlay */}
-      <div
-        className="absolute inset-0 bg-no-repeat bg-[length:150px_150px] opacity-10"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='25' cy='25' r='2'/%3E%3Ccircle cx='125' cy='125' r='2'/%3E%3Ccircle cx='75' cy='75' r='2'/%3E%3C/g%3E%3C/svg%3E")`,
-        }}
-      ></div>
+    <div className="flex flex-col md:h-screen md:flex-row overflow-y-auto  bg-gray-100">
+      {/* Mobile Toggle Button */}
+      <div className="md:hidden flex justify-between items-center bg-white p-4 shadow">
+        <h2 className="text-xl font-bold">Admin Panel</h2>
+        <button onClick={() => setSidebarOpen(!sidebarOpen)}>
+          <FiMenu size={24} />
+        </button>
+      </div>
 
-      {/* Top Navigation */}
-      <div className=" bg-gradient-to-br from-pink-600 via-purple-500 to-blue-600  backdrop-blur-md shadow-lg p-4 flex justify-center gap-4 sm:gap-6 mt-5 mx-4 sm:mx-auto rounded-full z-20">
-        {[
-          { name: "Posts", value: "posts" },
-          { name: "Create", value: "create-product" },
-          { name: "Orders", value: "orders" },
-        ].map((item) => (
+      {/* Sidebar */}
+      <div
+        className={`w-full md:w-64 bg-white shadow-md p-6 space-y-6 transition-all duration-300 ${sidebarOpen ? "block" : "hidden"
+          } md:block`}
+      >
+        <h2 className="text-2xl font-bold text-gray-800 hidden md:block">Admin Panel</h2>
+        <nav className="flex flex-col gap-3">
           <button
-            key={item.value}
-            onClick={() => setActive(item.value)}
-            className={`px-3 py-1 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-medium transition-all duration-300 cursor-pointer ${
-              active === item.value
-                ? "bg-blue-600 text-white shadow-md"
-                : "text-gray-300 hover:bg-blue-100 hover:text-black"
-            }`}
+            onClick={() => {
+              setActiveTab("products");
+              setSidebarOpen(false);
+            }}
+            className={`text-left px-4 py-2 rounded ${activeTab === "products" ? "bg-pink-200 font-semibold" : "hover:bg-pink-100"
+              }`}
           >
-            {item.name}
+            Products
           </button>
-        ))}
+          <button
+            onClick={() => {
+              setActiveTab("orders");
+              setSidebarOpen(false);
+            }}
+            className={`text-left px-4 py-2 rounded ${activeTab === "orders" ? "bg-pink-200 font-semibold" : "hover:bg-pink-100"
+              }`}
+          >
+            Orders
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab("users");
+              setSidebarOpen(false);
+            }}
+            className={`text-left px-4 py-2 rounded ${activeTab === "users" ? "bg-pink-200 font-semibold" : "hover:bg-pink-100"
+              }`}
+          >
+            Users
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab("create");
+              setSidebarOpen(false);
+            }}
+            className={`text-left px-4 py-2 rounded ${activeTab === "create" ? "bg-pink-200 font-semibold" : "hover:bg-pink-100"
+              }`}
+          >
+            Create Product
+          </button>
+        </nav>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 m-3 relative z-10">
-        <div className="min-h-[calc(100vh-12rem)]">
-          {active === "create-product" && <CreateProduct />}
-          {active === "orders" && (
+      <div className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto ">
+        {activeTab === "users" && (
+          <>
+            <h3 className="text-xl font-bold mb-4">Users</h3>
+            <input
+              type="text"
+              placeholder="Search by email..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="mb-4 px-4 py-2 border rounded w-full"
+            />
+            <div className="space-y-4 overflow-y-auto">
+              {filteredUsers.map((user) => (
+                <div key={user._id} className="p-4 bg-white rounded shadow">
+                  <h4 className="text-lg font-semibold">{user.fullname}</h4>
+                  <p>Email: {user.email}</p>
+                  <p>Created: {new Date(user.createdAt).toLocaleDateString()}</p>
+                  <p>Orders: {user.order.length}</p>
+                  <p>Cart Items: {user.cart?.length || 0}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {activeTab === "orders" && (
+          <>
+            <h3 className="text-xl font-bold mb-4">All Orders</h3>
+            {/* {active === "orders" && ( */}
             <div>
-              <h1 className="text-2xl lg:text-3xl font-bold text-white text-center mb-6 drop-shadow-md">
+              <h1 className="text-2xl lg:text-3xl font-bold text-center mb-6 drop-shadow-md">
                 Order Details
               </h1>
-              <OrderDetails className="w-full" orderDetails={orderDetails?.d1} />
+              <OrderDetails className="" orderDetails={orderDetails?.d1} />
             </div>
-          )}
-          {active === "posts" && (
-            <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-10 w-full">
+            {/* )} */}
+          </>
+        )}
+
+        {activeTab === "products" && (
+          <div className="">
+            <h3 className="text-xl font-bold mb-4">Product List</h3>
+
+            <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {posts?.length > 0 ? (
                 posts?.map((post) => <Posts key={post?._id} post={post} />)
               ) : (
                 <p className="text-gray-300 text-center col-span-full py-10 text-lg">
                   No posts available.
-                </p>
-              )}
+                </p>)}
             </div>
-          )}
-        </div>
-      </div>
+          </div>
+        )}
 
-      {/* Animated Accents */}
-      <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl animate-float-slow"></div>
+        {activeTab === "create" && (
+          <CreateProduct />
+        )}
+      </div>
     </div>
   );
 };
 
-export default Admin;
+export default AdminPanel;

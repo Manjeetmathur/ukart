@@ -299,6 +299,15 @@ export const phoneNo = asyncHandler(async (req, res) => {
   }
 })
 
+const getAllUserDetails = asyncHandler(async (req, res) => {
+ 
+ const  users =  (await User.find().populate({ path: 'order' }).populate({ path: 'cart' }).populate({ path: 'address' }))
+
+  res.status(200).json({
+    success: true,
+    users,
+  })
+})
 const getUserDetails = asyncHandler(async (req, res) => {
   let user = req.user
   const email = user.email
@@ -313,4 +322,4 @@ const getUserDetails = asyncHandler(async (req, res) => {
 })
 
 
-export { registerUser, getAddress,login, logout, getUserDetails, makeUserAdmin, addAddress ,updateAddress,deleteAddress};
+export { registerUser, getAddress,login, logout, getUserDetails, makeUserAdmin, addAddress ,updateAddress,deleteAddress,getAllUserDetails};

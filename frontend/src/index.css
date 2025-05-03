@@ -41,9 +41,9 @@
   animation-range: entry 0% cover 40%;
 
 }
-.bg-wave-pattern {
+/* .bg-wave-pattern {
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4zm0-10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
+} */
 
 /* Glassmorphism effect */
 .glassmorphism {
@@ -70,8 +70,8 @@
 /* Floating badge */
 .floating-badge {
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: 10px;
+  right: 10px;
   transform: rotate(15deg);
   animation: float 3s ease-in-out infinite;
 }
@@ -82,12 +82,12 @@
 } */
 
 /* Glowing button effect */
-.glow-button {
+/* .glow-button {
   position: relative;
   overflow: hidden;
-}
+} */
 
-.glow-button::before {
+/* .glow-button::before {
   content: '';
   position: absolute;
   top: 0;
@@ -96,11 +96,11 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
   transition: 0.5s;
-}
+} */
 
-.glow-button:hover::before {
+/* .glow-button:hover::before {
   left: 100%;
-}
+} */
 
 /* Sparkle animation for headings */
 .sparkle {
@@ -136,7 +136,7 @@
   display: none;
 }
 
-.scrollbar-hide {
+/* .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
+} */
