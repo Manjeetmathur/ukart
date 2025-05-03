@@ -35,7 +35,7 @@ const Orders = ({ order }) => {
   };
 
   return (
-    <div className="relative w-[250px]  bg-black/10 backdrop-blur-lg text-sm  rounded-lg p-4 border border-white/10 shadow-md transition hover:scale-[1.01]">
+    <div className="relative w-full my-4 bg-black/10 backdrop-blur-lg text-sm  rounded-lg p-4 border border-white/10 shadow-md transition hover:scale-[1.01]">
       {/* Toggle Button */}
       <button
         className="absolute top-3 right-3 text-lg bg-white/20 hover:bg-white/30 rounded-full p-1 transition"
