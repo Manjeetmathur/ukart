@@ -42,15 +42,16 @@ const BuyPage = () => {
 
               fetchProduct();
        }, [id]);
-       const fetchAddress = async () => {
+       const fetchAddress = async (addrId) => {
               try {
-                     const { data } = await axios.get(`${url}/user/get-address/${selectedAddress}`, {
+                     const { data } = await axios.get(`${url}/user/get-address/${addrId}`, {
                             withCredentials: true,
-                            withXSRFToken:true
+                            withXSRFToken: true
                      });
                      console.log(data)
                      if (data.success) {
                             setaddress(data.add);
+                            setIsAddressModalOpen(false);
                      } else {
                             // toast.error("Product not found!");
                      }
@@ -157,7 +158,7 @@ const BuyPage = () => {
                                                                       <p> <b>District</b> : <i> {address?.district || "Not provided"}</i> </p>
                                                                       <p> <b>Area</b> : <i>{address?.area || "Not provided"}</i> </p>
                                                                       <p> <b>Pincode</b> : <i>{address?.pincode || "Not provided"}</i> </p>
-                                                                      </div>
+                                                               </div>
                                                         </div>
                                                  )}
                                           </>
@@ -188,8 +189,8 @@ const BuyPage = () => {
                                                                <button
                                                                       onClick={async () => {
                                                                              setSelectedAddress(addr?._id);
-                                                                            await fetchAddress()
-                                                                             setIsAddressModalOpen(false);
+                                                                             await fetchAddress(addr?._id)
+
                                                                       }}
                                                                       className={`w-full text-left p-3 rounded-lg border ${selectedAddress === addr?._id
                                                                              ? "bg-blue-100 border-blue-500"
