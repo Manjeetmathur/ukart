@@ -6,7 +6,7 @@ import { context } from "../../../Context/Context";
 import Address from "./Address";
 import { useSelector } from "react-redux";
 
-const UserProfile = ({ userId }) => {
+const UserProfile = () => {
        const [user, setUser] = useState(null);
        const [loading, setLoading] = useState(true);
        const [editAddress, setEditAddress] = useState(false);
@@ -19,29 +19,7 @@ const UserProfile = ({ userId }) => {
 
        const { getUserDetails } = useContext(context)
        const { userInfo } = useSelector(st=>st.auth)
-       // console.log(userInfo)
-       // const fetchUser = async () => {
-       //        try {
-       //               // const { data } = await axios.get(`${url}/user/get-user-details`, {
-       //               //        withCredentials: true,
-       //               // });
-       //               const data = await getUserDetails()
-       //               console.log(data)
-       //               if (data.success) {
-       //                      setUser(data.user);
-       //                      setAddress(data.user.address || ""); // Set initial address
-       //               } else {
-       //                      toast.error("User not found!");
-       //               }
-       //        } catch (error) {
-       //               toast.error("Failed to load user data!");
-       //        } finally {
-       //               setLoading(false);
-       //        }
-       // };
-       // useEffect(() => {
-       //        fetchUser();
-       // }, []);
+     
        const updateAddress = async () => {
               try {
                      // let add = address + " " + paddress;
@@ -56,7 +34,7 @@ const UserProfile = ({ userId }) => {
                                    withXSRFToken: true,
                             }
                      );
-                     console.log(data)
+                     // console.log(data)
 
                      if (data.success) {
                             toast.success("Address updated successfully!");

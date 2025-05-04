@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { IoCart } from "react-icons/io5";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { context } from "../../Context/Context";
+import { FaShareAlt } from "react-icons/fa";
 
 const HomeLower = ({ post }) => {
   const [cloading, setcLoading] = useState(false);
@@ -52,11 +53,30 @@ const HomeLower = ({ post }) => {
       setcLoading(false);
     }
   };
+  const handleShare = async () => {
+    const shareData = {
+      title: post?.postTitle || "Check this product",
+      text: "Take a look at this product!",
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        toast.success("Link copied to clipboard!");
+      }
+    } catch (err) {
+      toast.error("Failed to share link");
+    }
+  };
 
   return (
     <div className="my-6 px-4">
       <div className="bg-white/90 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 max-w-sm mx-auto animate-slideUp">
         {/* Product Image */}
+        
         <Link to={`/product/${post?._id}`}>
           <div className="relative group">
             <img
@@ -65,7 +85,7 @@ const HomeLower = ({ post }) => {
               className="w-full h-56 object-contain rounded-t-xl transition-transform duration-300 group-hover:scale-105"
             />
             <div className="absolute inset-0 glassmorphism opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="floating-badge absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs font-semibold px-2 py-1 rounded-full shadow-md">
+            <div className="floating-badge absolute top-0 right-0 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs font-semibold px-2 py-1 rounded-full shadow-md">
               {post?.stock === 0 ? "Sold Out" : "New"}
             </div>
           </div>
@@ -103,6 +123,12 @@ const HomeLower = ({ post }) => {
                 <FiPlus />
               </button>
             </div>
+            <button
+          onClick={handleShare}
+          className="   bg-blue-300 py-3 px-3 rounded-lg  transition-all duration-300 text-base font-semibold shadow-xl hover:shadow-lg"
+        >
+          <FaShareAlt />
+        </button>
           </div>
 
           {/* Buttons */}

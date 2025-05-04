@@ -16,20 +16,20 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const logoutHandler = async () => {
-    try {
-      const { data } = await axios.get(`${url}/user/logout`, {
-        withCredentials: true,
-      });
-      if (data.success) {
+    // try {
+    //   const { data } = await axios.get(`${url}/user/logout`, {
+    //     withCredentials: true,
+    //   });
+    //   if (data.success) {
         dispatch(logout());
-        toast.success(data.message);
+    //     toast.success(data.message);
         navigate("/login");
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error("An error occurred during logout.");
-    }
+    //   } else {
+    //     toast.error(data.message);
+    //   }
+    // } catch (error) {
+    //   toast.error("An error occurred during logout.");
+    // }
   };
 
   return (

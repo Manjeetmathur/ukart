@@ -27,6 +27,11 @@ const Explore = () => {
       value: "neckband",
     },
     {
+      imag: "https://tse2.mm.bing.net/th?id=OIP.Q_cMq5InmGDs-hO598RnVgHaE4&pid=Api&P=0&h=180",
+      label: "Gadgets",
+      value: "gadgets",
+    },
+    {
       imag: "https://tse1.mm.bing.net/th?id=OIP.tW2THcHjVClz4akyleVEsgHaJY&pid=Api&P=0&h=180",
       label: "Watch",
       value: "watch",
@@ -122,16 +127,16 @@ const Explore = () => {
         </h2>
         <div className="flex p-2 px-6 overflow-x-auto space-x-4 scrollbar-hide snap-x snap-mandatorygap-3">
           {name === "electronics" &&
-            electronicscategories.map((category, idx) => (
+            electronicscategories?.map((category, idx) => (
               <button
                 key={idx}
-                onClick={() => setProCat(category.value)}
+                onClick={() => setProCat(category?.value)}
                 className="flex-shrink-0 text-center snap-center group animate-slideUp"
               >
                 <div className="relative glassmorphism rounded-full p-2">
                   <img
-                    src={category.imag}
-                    alt={category.label}
+                    src={category?.imag}
+                    alt={category?.label}
                     loading="lazy"
                     className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-pink-300/50 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:border-pink-400"
                   />
@@ -139,17 +144,17 @@ const Explore = () => {
                 </div>
                 <p
                   className={`mt-2 text-sm sm:text-base font-semibold capitalize rounded-xl px-3 py-1 glow-button ${
-                    productcat === category.value
+                    productcat === category?.value
                       ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg"
                       : "bg-white/80 text-purple-700 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-white hover:shadow-lg"
                   }`}
                 >
-                  {category.label}
+                  {category?.label}
                 </p>
               </button>
             ))}
           {name === "gifts" &&
-            giftscategories.map((category, idx) => (
+            giftscategories?.map((category, idx) => (
               <button
                 key={idx}
                 onClick={() => setProCat(category.value)}
@@ -157,8 +162,8 @@ const Explore = () => {
               >
                 <div className="relative glassmorphism rounded-full p-2">
                   <img
-                    src={category.imag}
-                    alt={category.label}
+                    src={category?.imag}
+                    alt={category?.label}
                     loading="lazy"
                     className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-pink-300/50 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:border-pink-400"
                   />
@@ -166,17 +171,17 @@ const Explore = () => {
                 </div>
                 <p
                   className={`mt-2 text-sm sm:text-base font-semibold capitalize rounded-xl px-3 py-1 glow-button ${
-                    productcat === category.value
+                    productcat === category?.value
                       ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg"
                       : "bg-white/80 text-purple-700 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-white hover:shadow-lg"
                   }`}
                 >
-                  {category.label}
+                  {category?.label}
                 </p>
               </button>
             ))}
           {name === "shringar" &&
-            shringarcategories.map((category, idx) => (
+            shringarcategories?.map((category, idx) => (
               <button
                 key={idx}
                 onClick={() => setProCat(category.value)}
@@ -184,8 +189,8 @@ const Explore = () => {
               >
                 <div className="relative glassmorphism rounded-full p-2">
                   <img
-                    src={category.imag}
-                    alt={category.label}
+                    src={category?.imag}
+                    alt={category?.label}
                     loading="lazy"
                     className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-cover border-4 border-pink-300/50 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:border-pink-400"
                   />
@@ -193,12 +198,12 @@ const Explore = () => {
                 </div>
                 <p
                   className={`mt-2 text-sm sm:text-base font-semibold capitalize rounded-xl px-3 py-1 glow-button ${
-                    productcat === category.value
+                    productcat === category?.value
                       ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg"
                       : "bg-white/80 text-purple-700 hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-500 hover:text-white hover:shadow-lg"
                   }`}
                 >
-                  {category.label}
+                  {category?.label}
                 </p>
               </button>
             ))}
@@ -215,7 +220,7 @@ const Explore = () => {
         </h2>
         {filteredPosts?.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredPosts.map((item) => (
+            {filteredPosts?.map((item) => (
               <HomeLower key={item?._id} post={item} />
             ))}
           </div>

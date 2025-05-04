@@ -33,7 +33,7 @@ const AdminPanel = () => {
     getAll();
   }, []);
   const filteredUsers = userData.filter((user) =>
-    user.email.toLowerCase().includes(searchQuery.toLowerCase())
+    user?.email?.toLowerCase()?.includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -109,7 +109,7 @@ const AdminPanel = () => {
               className="mb-4 px-4 py-2 border rounded w-full"
             />
             <div className="space-y-4 overflow-y-auto">
-              {filteredUsers.map((user) => (
+              {filteredUsers?.map((user) => (
                 <div key={user._id} className="p-4 bg-white rounded shadow">
                   <h4 className="text-lg font-semibold">{user.fullname}</h4>
                   <p>Email: {user.email}</p>

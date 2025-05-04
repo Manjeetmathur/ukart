@@ -49,7 +49,7 @@ const Orders = ({ order }) => {
       {editStatus && (
         <div className="mb-3 p-3 rounded-md bg-white/20 border border-white/30">
           <div className="flex flex-wrap gap-3 mb-3">
-            {["Completed", "Pending", "Cancelled"].map((s) => (
+            {["Completed", "Pending", "Cancelled"]?.map((s) => (
               <label key={s} className="flex items-center gap-1 text-sm cursor-pointer">
                 <input
                   type="radio"

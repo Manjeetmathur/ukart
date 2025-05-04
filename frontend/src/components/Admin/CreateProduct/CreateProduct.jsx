@@ -84,7 +84,7 @@ const CreateProduct = () => {
             { id: "postTitle", label: "Product Title", value: postTitle, setter: setpostTitle },
             { id: "postPrice", label: "Price", value: postPrice, setter: setpostPrice },
             { id: "stock", label: "Stock", value: stock, setter: setstock }
-          ].map(({ id, label, value, setter }) => (
+          ]?.map(({ id, label, value, setter }) => (
             <div key={id}>
               <label htmlFor={id} className="block text-sm font-semibold mb-1">{label}</label>
               <input
@@ -127,7 +127,7 @@ const CreateProduct = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="" disabled>Select Domain</option>
-              {Object.keys(categoryOptions).map(domain => (
+              {Object?.keys(categoryOptions).map(domain => (
                 <option key={domain} value={domain}>{domain}</option>
               ))}
             </select>
@@ -146,7 +146,7 @@ const CreateProduct = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="" disabled>Select Category</option>
-                {categoryOptions[postParentCategory].map((cat) => (
+                {categoryOptions[postParentCategory]?.map((cat) => (
                   <option key={cat} value={cat}>{cat}</option>
                 ))}
               </select>

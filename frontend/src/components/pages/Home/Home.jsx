@@ -9,18 +9,22 @@ import HomeLower from "../../HomeMiddle/HomeLower";
 const categories = [
   {
     name: "electronics",
+    link:"electronics",
     image: "https://tse4.mm.bing.net/th?id=OIP.w18CXqXfi-8C-d1q89_ycgHaE8&pid=Api&P=0&h=180",
   },
   {
     name: "gifts",
+    link: "gifts",
     image: "https://tse1.mm.bing.net/th?id=OIP.wd3p1bZSRi2rJBR-PaWVeQHaHa&pid=Api&P=0&h=180",
   },
   {
-    name: "sringaar",
+    name: "Sringaar",
+    link: "shringar",
     image: "https://wallpapercave.com/wp/wp8149661.jpg",
   },
   {
     name: "decoration",
+    link: "decoration",
     image: "https://deowgxgt4vwfe.cloudfront.net/uploads/1677676541_original.jpg",
   },
 ];
@@ -44,7 +48,7 @@ const banners = [
   {
     image: "https://www.culturalindia.net/iliimages/Solah-Shringaar-ili-104-img-7.jpg",
     title: "New Arrivals",
-    subtitle: "Sringaar",
+    subtitle: "shringar",
     cta: "Explore Now",
     link: "/explore/shringar",
   },
@@ -76,22 +80,22 @@ const Home = () => {
         <div className="w-full h-[40vh] sm:h-[50vh] md:h-[400px] lg:h-[60vh] relative">
           {/* Image element instead of background image */}
           <img
-            src={banners[bannerIndex].image}
-            alt={banners[bannerIndex].title}
+            src={banners[bannerIndex]?.image}
+            alt={banners[bannerIndex]?.title}
             className="w-full h-full object-cover"
           />
 
           <div className="absolute inset-0 glassmorphism flex items-center justify-start px-4 sm:px-8 md:px-12 lg:px-16">
             <div className="text-left max-w-lg animate-slideUp">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-pink-300 tracking-tight drop-shadow-lg sparkle">
-                {banners[bannerIndex].title}
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-white tracking-tight drop-shadow-lg sparkle">
+                {banners[bannerIndex]?.title}
               </h1>
               <p className="mt-3 text-sm sm:text-base md:text-lg text-white font-medium opacity-90">
-                {banners[bannerIndex].subtitle}
+                {banners[bannerIndex]?.subtitle}
               </p>
-              <Link to={banners[bannerIndex].link}>
+              <Link to={banners[bannerIndex]?.link}>
                 <button className="mt-6 px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-full glow-button shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 focus:outline-none focus:ring-4 focus:ring-pink-400/50">
-                  {banners[bannerIndex].cta} <FaLongArrowAltRight />
+                  {banners[bannerIndex]?.cta} <FaLongArrowAltRight />
                 </button>
               </Link>
             </div>
@@ -100,7 +104,7 @@ const Home = () => {
 
         {/* Banner Navigation Dots */}
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
-          {banners.map((_, idx) => (
+          {banners?.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setBannerIndex(idx)}
@@ -122,23 +126,23 @@ const Home = () => {
           Shop by Category
         </h2>
         <div className="flex overflow-x-auto space-x-6 pb-4 scrollbar-hide snap-x snap-mandatory justify-center pl-[180px]">
-          {categories.map((category) => (
+          {categories?.map((category) => (
             <Link
-              key={category.name}
-              to={`/explore/${category.name.toLowerCase()}`}
+              key={category?.name}
+              to={`/explore/${category?.link?.toLowerCase()}`}
               className="flex-shrink-0 text-center snap-center group"
             >
               <div className="relative glassmorphism rounded-full p-2">
                 <img
-                  src={category.image}
-                  alt={category.name}
+                  src={category?.image}
+                  alt={category?.name}
                   loading="lazy"
                   className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full object-cover border-4 border-pink-300/50 shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:border-pink-400"
                 />
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               <p className="mt-3 text-sm sm:text-base text-purple-800 font-semibold capitalize group-hover:text-pink-600 transition-colors duration-300">
-                {category.name}
+                {category?.name}
               </p>
             </Link>
           ))}
@@ -150,16 +154,16 @@ const Home = () => {
 
       {/* Featured Products Section */}
       <div className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-200 to-purple-200 bg-wave-pattern">
-        {["electronics", "shringar", "gifts"].map((category) => {
+        {["electronics", "shringar", "gifts"]?.map((category) => {
           const categoryPosts = posts?.filter((item) => item.postParentCategory === category);
 
           return categoryPosts?.length > 0 ? (
             <div key={category} className="mb-16 animate-slideUp">
               <h2 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 mb-8 capitalize text-center sparkle">
-                {category}
+                {category==='shringar' ? "Sringaar" : category }
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {categoryPosts?.slice(0, 4).map((item, idx) => (
+                {categoryPosts?.slice(0, 4)?.map((item, idx) => (
                   <HomeLower key={idx} post={item} />
                 ))}
               </div>
@@ -190,7 +194,7 @@ const Home = () => {
           Top Deals
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {posts?.slice(0, 4).map((item, idx) => (
+          {posts?.slice(0, 4)?.map((item, idx) => (
             <HomeLower key={idx} post={item} />
           ))}
         </div>
