@@ -36,7 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
       profile: profile?.url || " ",
       email,
       password: hashPassword,
-      address: ""
+      address: null
     });
 
     if (role === 'admin') {
@@ -45,6 +45,7 @@ const registerUser = asyncHandler(async (req, res) => {
         profile: profile?.url || " ",
         email,
         password: hashPassword,
+        address:null
       })
     }
 
