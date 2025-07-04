@@ -25,7 +25,9 @@ app.use("/api/user", userRoutes);
 
 import postRouter from "./routes/post.routes.js"
 app.use("/api/post",postRouter)
-
+app.get("/",async(req,res)=>{
+  res.send("ukart backend")
+})
 // app.use(express.static(path.join(__dirname,"/frontend/dist")))
 // app.get("*",(req,res) => {
 //   res.sendFile(path.resolve(__dirname,"/frontend","dist","index.html"))
